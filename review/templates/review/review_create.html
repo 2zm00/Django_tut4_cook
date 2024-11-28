@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+review\templates\review\review_create.html
+
+<h3>리뷰 작성하기</h3>
+
+<form action="{% url 'review:review_create' %}" method="POST">
+	{% csrf_token %}
+	<label for="">리뷰 제목</label> 
+	<input type="text" name="review_title"><br>
+	<label for="">내용</label> 
+	<input type="text" name="review_content"><br>
+	<input type="submit" value="메뉴 추가해서 DB에 제공">
+</form>
+
+{% endblock %}

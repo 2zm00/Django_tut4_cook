@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}{{ review.title }}{% endblock %}
+
+{% block extra-style %}
+<style>
+    .detail-section {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 80px 0;
+    }
+
+    .detail-title {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .detail-meta {
+        font-size: 16px;
+        color: #86868b;
+    }
+
+    .content-section {
+        background-color: #fbfbfd;
+        padding: 60px 0;
+    }
+
+    .content-box {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-btn {
+        background-color: #2997ff;
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 18px;
+        transition: opacity 0.3s;
+        text-decoration: none;
+    }
+
+    .back-btn:hover {
+        opacity: 0.8;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="detail-section content-fade">
+    <div class="container">
+        <h1 class="detail-title">{{ review.title }}</h1>
+        <p class="detail-meta">작성일: {{ review.created_at|date:"Y-m-d H:i" }}</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <div class="container">
+        <div class="content-box content-fade">
+            <div class="review-content">
+                {{ review.content|linebreaks }}
+            </div>
+            <hr class="my-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">최종 수정일: {{ review.updated_at|date:"Y-m-d H:i" }}</small>
+                <a href="{% url 'review:review_index' %}" class="back-btn">목록으로</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}환영합니다!{% endblock %}
+
+{% block extra-style %}
+<style>
+    .hero-section {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 120px 0;
+    }
+
+    .hero-title {
+        font-size: 56px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+        font-size: 27px;
+        font-weight: 400;
+        color: #86868b;
+        margin-bottom: 30px;
+    }
+
+    .product-section {
+        background-color: #fbfbfd;
+        padding: 80px 0;
+        text-align: center;
+    }
+
+    .cta-link {
+        color: #2997ff;
+        text-decoration: none;
+        font-size: 21px;
+        transition: opacity 0.3s;
+    }
+
+    .cta-link:hover {
+        opacity: 0.7;
+    }
+
+    .content-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero-section content-fade">
+    <div class="container">
+        <h1 class="hero-title">웹 프로그래밍 프로젝트입니다.</h1>
+        <h2 class="hero-subtitle">리뷰 페이지, 블로그를 구현했습니다.</h2>
+        <a href="{% url 'review:review_index' %}" class="cta-link">
+            리뷰 보러가기 <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+</div>
+
+<div class="product-section content-fade">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>기능 하나</h3>
+                <p>리뷰 작성할 수 있습니다.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>기능 둘</h3>
+                <p>블로그 포스트를 작성할 수 있습니다.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>기능 셋</h3>
+                <p>디자인을 추가하였습니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

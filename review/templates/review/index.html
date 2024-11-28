@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}리뷰 작성{% endblock %}
+
+{% block extra-style %}
+<style>
+    .review-section {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 80px 0;
+    }
+
+    .review-title {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .review-subtitle {
+        font-size: 24px;
+        font-weight: 400;
+        color: #86868b;
+        margin-bottom: 40px;
+    }
+
+    .form-section {
+        background-color: #fbfbfd;
+        padding: 60px 0;
+    }
+
+    .review-list-section {
+        background-color: #fff;
+        padding: 60px 0;
+    }
+
+    .review-card {
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: transform 0.2s;
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .review-meta {
+        color: #86868b;
+        font-size: 14px;
+    }
+    .submit-btn {
+        background-color: #2997ff;
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 18px;
+        transition: opacity 0.3s;
+    }
+
+    .submit-btn:hover {
+        opacity: 0.8;
+        color: #fff;
+    }
+
+    .cancel-btn {
+        background-color: #424245;
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 18px;
+        transition: opacity 0.3s;
+        margin-left: 10px;
+    }
+
+    .cancel-btn:hover {
+        opacity: 0.8;
+        color: #fff;
+    }
+
+    /* 이전 스타일 유지 */
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="review-section content-fade">
+    <div class="container">
+        <h1 class="review-title">리뷰 작성하기</h1>
+        <h2 class="review-subtitle">여러분의 소중한 경험을 공유해주세요</h2>
+    </div>
+</div>
+
+<div class="form-section">
+    <div class="container">
+        <form action="{% url 'review:review_create' %}" method="POST" class="content-fade">
+            {% csrf_token %}
+            <div class="mb-4">
+                <input type="text" class="form-control" name="review_title" 
+                       placeholder="제목을 입력해주세요" required>
+            </div>
+            <div class="mb-4">
+                <textarea class="form-control" name="review_content" 
+                          rows="8" placeholder="내용을 입력해주세요" required></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="submit-btn">작성 완료</button>
+                <a href="{% url 'review:review_index' %}" class="cancel-btn">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="review-list-section">
+    <div class="container">
+        <h2 class="mb-4">작성된 리뷰</h2>
+        {% for review in reviews %}
+            <a href="{% url 'review:review_detail' review.pk %}" class="text-decoration-none">
+                <div class="review-card">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="mb-1 text-dark">{{ review.title }}</h5>
+                        <small class="review-meta">{{ review.created_at|date:"Y-m-d H:i" }}</small>
+                    </div>
+                    <p class="text-secondary mb-0">{{ review.content|truncatewords:30 }}</p>
+                </div>
+            </a>
+        {% empty %}
+            <p class="text-center text-muted">작성된 리뷰가 없습니다.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

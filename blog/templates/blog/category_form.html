@@ -1,0 +1,52 @@
+{% extends 'blog/blog_base.html' %}
+
+{% block extra-style %}
+{{ block.super }}
+<style>
+    .form-control {
+        border: 1px solid #d2d2d7;
+        padding: 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #2997ff;
+        box-shadow: none;
+    }
+
+    .action-btn {
+        padding: 10px 25px;
+        border-radius: 20px;
+        transition: opacity 0.3s;
+    }
+
+    .save-btn {
+        background-color: #2997ff;
+        color: #fff;
+    }
+
+    .cancel-btn {
+        background-color: #424245;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block blog_content %}
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-transparent border-0">
+        <h4 class="text-center mb-0">카테고리 추가</h4>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button type="submit" class="action-btn save-btn">저장</button>
+                <a href="{% url 'blog:category_list' %}" class="action-btn cancel-btn text-decoration-none">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
